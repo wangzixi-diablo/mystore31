@@ -1,16 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { translations, translationChunksConfig } from '@spartacus/assets';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
+import { translationChunksConfig, translations } from '@spartacus/assets';
 import { B2cStorefrontModule } from '@spartacus/storefront';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { SpartacusModule } from './spartacus/spartacus.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    HttpClientModule,
     B2cStorefrontModule.withConfig({
       backend: {
         occ: {
@@ -29,7 +34,12 @@ import { B2cStorefrontModule } from '@spartacus/storefront';
       features: {
         level: '3.1'
       }
-    })
+    }),
+    AppRoutingModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    SpartacusModule,
+    BrowserTransferStateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
