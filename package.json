@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "ssrdebug": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 node --inspect-brk dist/mystore31/server/main.js",
     "dev:ssr": "ng run mystore31:serve-ssr",
     "serve:ssr": "node dist/mystore31/server/main.js",
     "build:ssr": "ng build --prod && ng run mystore31:server:production",
